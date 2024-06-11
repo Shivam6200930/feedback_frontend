@@ -17,29 +17,28 @@ This is a simple feedback management system that allows users to submit and view
    cd backend
 Install dependencies:
 
-bash
-Copy code
-npm install
+```bash
+  npm install
+
 Run the server:
 
-bash
+```bash
 Copy code
 npm run dev
 Frontend
 Navigate to the frontend directory:
 
-bash
-Copy code
-cd frontend
-Install dependencies:
+```bash
+  cd frontend
+ Install dependencies:
 
-bash
-Copy code
+```bash
+
 npm install
 Start the React application:
 
-bash
-Copy code
+```bash
+
 npm start
 Endpoints
 Retrieve all feedback entries
