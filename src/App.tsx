@@ -1,26 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import FeedbackForm from './components/FeedbackForm';
+import FeedbackList from './components/FeedbackList';
+import axios from 'axios';
+import './App.css'
 
-function App() {
+interface Feedback {
+  name: string;
+  feedback: string;
+}
+
+const App: React.FC = () => {
+  const [feedbacks, setFeedbacks] = useState<Feedback[]>([]);
+
+  useEffect(() => {
+    const fetchFeedbacks = async () => {
+      const response = await axios.get('https://feedback-061n.onrender.com/feedback');
+      setFeedbacks(response.data);
+    };
+
+    fetchFeedbacks();
+  }, []);
+
+  const addFeedback = async (feedback: Feedback) => {
+    try {
+      await axios.post('https://feedback-061n.onrender.com/feedback', feedback);
+      setFeedbacks((prevFeedbacks) => [...prevFeedbacks, feedback]);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Feedback Management System</h1>
+      <FeedbackForm addFeedback={addFeedback} />
+      <FeedbackList feedbacks={feedbacks} />
     </div>
   );
-}
+};
 
 export default App;
