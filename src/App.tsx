@@ -4,7 +4,7 @@ import FeedbackList from './components/FeedbackList';
 import axios from 'axios';
 import './App.css'
 
-interface Feedback {
+export interface Feedback {
   name: string;
   feedback: string;
 }
@@ -31,11 +31,15 @@ const App: React.FC = () => {
   };
 
   return (
-    <div>
+    <>
       <h1>Feedback Management System</h1>
-      <FeedbackForm addFeedback={addFeedback} />
-      <FeedbackList feedbacks={feedbacks} />
-    </div>
+      <div className="form">
+        <FeedbackForm addFeedback={addFeedback} />
+      </div>
+      <div className="list">
+        <FeedbackList feedbacks={feedbacks} />
+      </div>
+    </>
   );
 };
 
